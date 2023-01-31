@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://polycat.dae" type="PackedScene" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://CamArea.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.19239
+height = 0.710634
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[node name="World" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.08759, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 0.00616093, -0.999981, 0, 0.999981, 0.00616093, -0.0065195, 0.823417, 0.0528369 )
+shape = SubResource( 1 )
+
+[node name="Graphics" parent="Player" instance=ExtResource( 1 )]
+
+[node name="CamArea" type="Area" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="CamArea"]
+transform = Transform( 3.63414, 0, 0, 0, 1, 0, 0, 0, 2.5148, -1.8, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="CamArea"]
+transform = Transform( 0.000122267, 0.437995, -0.898978, 0.000251042, 0.898978, 0.437995, 1, -0.000279234, -3.92974e-08, -6, 2, 0 )
+current = true
+
+[node name="CamArea2" type="Area" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.44445, 0.268256, -1.15634e-08 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="CamArea2"]
+transform = Transform( 4.38888, 0, 0, 0, 1, 0, 0, 0, 1.55841, -1.93054, 0, 0.0231938 )
+shape = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="CamArea2"]
+transform = Transform( 0.00013967, -3.41277e-08, -1, 0.000244346, 1, 3.55271e-15, 1, -0.000244346, 0.00013967, -9.48458, 0.418964, 0.000875235 )
+current = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 5.00014, 0, 0, 0, 0.104819, 0, 0, 0, 1.55773, 0.0669703, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( -2.18816e-07, 0, 1.55953, 0, 0.10494, 0, -5.00592, 0, -6.81693e-08, 3.5, 0, 4 )
+mesh = SubResource( 2 )
+skeleton = NodePath("")
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
+shape = SubResource( 3 )
+
+[editable path="Player/Graphics"]
